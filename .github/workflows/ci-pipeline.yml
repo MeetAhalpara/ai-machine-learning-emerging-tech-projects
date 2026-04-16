@@ -36,12 +36,12 @@ jobs:
       run: |
         # Bandit scans the abstract syntax tree for security flaws (e.g., hardcoded keys, insecure parsing)
         # -r scans recursively; -ll surfaces medium and high-severity bugs
-        bandit -r 6-capstone-blockchain-skillchain/ -ll
+        bandit -r 6-CREDA-blockchain-skillchain/ -ll
 
     - name: Run Automated Test Harness with Code Coverage
       run: |
         # Runs unit tests while generating a coverage metric breakdown for your code files
-        pytest 6-capstone-blockchain-skillchain/tests/ -v --cov=6-capstone-blockchain-skillchain/ --cov-report=term-missing
+        pytest 6-CREDA-blockchain-skillchain/tests/ -v --cov=6-CREDA-blockchain-skillchain/ --cov-report=term-missing
         
     # =========================================================================
     # NOTIFICATION PIPELINE ENGINES
