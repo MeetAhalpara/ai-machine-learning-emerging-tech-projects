@@ -42,23 +42,23 @@ jobs:
       run: |
         # Runs unit tests while generating a coverage metric breakdown for your code files
         pytest 6-capstone-blockchain-skillchain/tests/ -v --cov=6-capstone-blockchain-skillchain/ --cov-report=term-missing
-
+        
     # =========================================================================
     # NOTIFICATION PIPELINE ENGINES
     # =========================================================================
 
     - name: Send Email Alert on Pipeline Failure
-      # conditional execution flag: triggers ONLY if a preceding step crashes
       if: ${{ failure() }}
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.gmail.com
         server_port: 465
-        username: ${{ secrets.MAIL_USERNAME }}
+        secure: true
+        username: meetahalpara1@gmail.com
         password: ${{ secrets.MAIL_PASSWORD }}
-        subject: "🚨 ALERT: SkillChain Build Broken on Main Branch"
-        to: your-professional-email@example.com
-        from: "SkillChain DevOps Runner"
+        subject: "ALERT: Build Broken on Main Branch"
+        to: MeetAhalpara1@gmail.com, ahal0002@algonquinlive.com
+        from: "DevOps Runner <meetahalpara1@gmail.com>"
         body: |
           The latest push or pull request failed validation testing on GitHub Actions.
           
@@ -70,17 +70,17 @@ jobs:
           https://github.com/MeetAhalpara/ai-machine-learning-emerging-tech-projects/actions
 
     - name: Send Email Notification on Pipeline Success
-      # conditional execution flag: triggers ONLY if every code test and security check passes perfectly
       if: ${{ success() }}
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.gmail.com
         server_port: 465
-        username: ${{ secrets.MAIL_USERNAME }}
+        secure: true
+        username: meetahalpara1@gmail.com
         password: ${{ secrets.MAIL_PASSWORD }}
-        subject: "✅ SUCCESS: SkillChain Build Verified for Production"
-        to: your-professional-email@example.com
-        from: "SkillChain DevOps Runner"
+        subject: "SUCCESS: Build Verified for Production"
+        to: MeetAhalpara1@gmail.com, ahal0002@algonquinlive.com
+        from: "DevOps Runner <meetahalpara1@gmail.com>"
         body: |
           Excellent execution. All continuous integration gates have cleared flawlessly.
           
