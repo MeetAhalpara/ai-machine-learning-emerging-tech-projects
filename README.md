@@ -28,7 +28,7 @@ Translating a chaotic matrix of 784 individual pixels into mathematical certaint
 ### 5. Natural Language Processing: Movie Sentiment Classifier
 Human language is filled with nuance and unpredictable structures. Demonstrating advanced **AI Solutions Engineering**, this end-to-end NLP pipeline bridges the gap between raw unstructured text and scalable artificial intelligence. It parses cinematic reviews and classifies them into absolute emotional states, handling rigorous text sanitization, synthetic data generation, continuous sequence padding, and global word embedding transformations to teach a deep neural network how to decode complex human emotion.
 
-### 6. Applied AI & Cryptography: SkillChain Capstone
+### 6. Applied AI & Cryptography: CREDA: Candidate Repository Data Analyzer
 Resumes lie, but code does not. Serving as the terminal capstone of this portfolio, this project showcases full-stack **AI Solutions Engineering** by coupling an intelligent static analysis engine with a cryptographic verification ledger. It autonomously parses raw GitHub repositories, extracts demonstrable architectural skills, mathematically estimates technical maturity, and permanently seals the evaluation report into a tamper-evident SHA-256 blockchain.
 
 ---
