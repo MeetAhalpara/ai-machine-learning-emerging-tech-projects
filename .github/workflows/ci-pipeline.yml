@@ -1,0 +1,90 @@
+name: SkillChain Continuous Integration Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  quality-assurance:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code Repository
+      uses: actions/checkout@v4
+
+    - name: Set Up Python Environment
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+        cache: 'pip'
+
+    - name: Install System Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest pandas openpyxl streamlit bandit pytest-cov
+
+    - name: Execute Code Linting Check (PEP 8)
+      run: |
+        # Stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all formatting warnings as informational flags without breaking the pipeline
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Run Static Security Vulnerability Scanner (AST)
+      run: |
+        # Bandit scans the abstract syntax tree for security flaws (e.g., hardcoded keys, insecure parsing)
+        # -r scans recursively; -ll surfaces medium and high-severity bugs
+        bandit -r 6-capstone-blockchain-skillchain/ -ll
+
+    - name: Run Automated Test Harness with Code Coverage
+      run: |
+        # Runs unit tests while generating a coverage metric breakdown for your code files
+        pytest 6-capstone-blockchain-skillchain/tests/ -v --cov=6-capstone-blockchain-skillchain/ --cov-report=term-missing
+
+    # =========================================================================
+    # NOTIFICATION PIPELINE ENGINES
+    # =========================================================================
+
+    - name: Send Email Alert on Pipeline Failure
+      # conditional execution flag: triggers ONLY if a preceding step crashes
+      if: ${{ failure() }}
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.MAIL_USERNAME }}
+        password: ${{ secrets.MAIL_PASSWORD }}
+        subject: "🚨 ALERT: SkillChain Build Broken on Main Branch"
+        to: your-professional-email@example.com
+        from: "SkillChain DevOps Runner"
+        body: |
+          The latest push or pull request failed validation testing on GitHub Actions.
+          
+          Repository: ${{ github.repository }}
+          Commit Hash: ${{ github.sha }}
+          Triggered By: ${{ github.actor }}
+          
+          Review the runtime logs immediately to fix breaking changes:
+          https://github.com/MeetAhalpara/ai-machine-learning-emerging-tech-projects/actions
+
+    - name: Send Email Notification on Pipeline Success
+      # conditional execution flag: triggers ONLY if every code test and security check passes perfectly
+      if: ${{ success() }}
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.MAIL_USERNAME }}
+        password: ${{ secrets.MAIL_PASSWORD }}
+        subject: "✅ SUCCESS: SkillChain Build Verified for Production"
+        to: your-professional-email@example.com
+        from: "SkillChain DevOps Runner"
+        body: |
+          Excellent execution. All continuous integration gates have cleared flawlessly.
+          
+          Repository: ${{ github.repository }}
+          Commit Hash: ${{ github.sha }}
+          
+          The main branch remains clean, stable, and ready for deployment.

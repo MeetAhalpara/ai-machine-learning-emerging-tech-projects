@@ -1,4 +1,7 @@
-# Machine Learning & Artificial Intelligence Portfolio
+# Applied Artificial Intelligence and Machine Learning Portfolio
+**Author:** Meet Ahalpara  
+**Academic Timeline:** Winter - Spring 2026  
+**Environment:** Python 3.13, TensorFlow 2.15+, Scikit-Learn, Pandas, NumPy
 
 Intelligence is not magic; it is the elegant application of logic, mathematics, and architecture to chaotic data. 
 
@@ -63,4 +66,4 @@ Once the environment is active, navigate to any specific project directory and e
 
 ---
 
-*Designed and engineered by Meet Ahalpara.*
+*Designed and engineered by Meet Ahalpara.* 
